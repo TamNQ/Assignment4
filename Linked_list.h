@@ -106,5 +106,13 @@ void sort_GPA_node(LIST *list);
  */
 void sort_Name_node(LIST *list);
 
+/*!
+ * @brief free up memory for list.
+ *
+ * @param *list Pass by reference pointer point to list want to free memory.
+ *
+ * @return Empty list.
+ */
 void freeList(LIST *list);
+
 #endif /* _LINKED_LIST_ */

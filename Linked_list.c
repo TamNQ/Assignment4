@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "Linked_list.h"
 
 /*******************************************************************************
@@ -183,41 +184,6 @@ void sort_Name_node(LIST *list){
     } 
 }
 
-void sort_Name(LIST *list){
-    FRESHER *ptr = list->pHead; /*Create a reference pointer of the pHead pointer*/
-    /*temporary data variables*/
-    unsigned int order_temp; 
-    char name_temp[50];
-    char account_temp[20];
-    float GPA_temp;
-    int i;
-    int size=countList(list); /*size of list*/
-    for (i =0;i<size;i++){
-        while(ptr->pNext!=NULL){ /*end of the linked list have NULL value pointer*/
-            if(strcmp(ptr->name,ptr->pNext->name) > 0){ /*Check if name order wrong*/
-                /*Change data of two nodes*/
-                /*Change order data*/
-                order_temp = ptr->order;
-                ptr->order = ptr->pNext->order;
-                ptr->pNext->order = order_temp;
-                /*change name*/
-                strcpy(name_temp,ptr->name);
-                strcpy(ptr->name, ptr->pNext->name);
-                strcpy(ptr->pNext->name, name_temp);
-                /*change account*/
-                strcpy(account_temp, ptr->account);
-                strcpy(ptr->account, ptr->pNext->account);
-                strcpy(ptr->pNext->account, account_temp);
-                /*change GPA*/
-                GPA_temp = ptr->GPA;
-                ptr->GPA = ptr->pNext->GPA;
-                ptr->pNext->GPA = GPA_temp;
-            }
-            ptr = ptr->pNext; /*jump to next node*/
-        }
-        ptr= list->pHead; /*return to pHead to run next loop*/
-    }
-}
 void sort_GPA_node(LIST *list){
     FRESHER *ptr = list->pHead; /*Create a reference pointer of the pHead pointer*/
     /*Pointer variable use as a temporary storage*/
@@ -265,42 +231,7 @@ void sort_GPA_node(LIST *list){
     }
 }
 
-void sort_GPA(LIST *list){
-    FRESHER *ptr = list->pHead; /*Create a reference pointer of the pHead pointer*/
-    /*temporary data variables*/
-    unsigned int order_temp;
-    char name_temp[50];
-    char account_temp[20];
-    float GPA_temp;
-    int i;
-    int size=countList(list); /*size of list*/
-    for(i = 1;i<=size;i++){
-        while(ptr->pNext !=NULL){ /*end of the linked list have NULL value pointer*/
-            if(ptr->GPA > ptr->pNext->GPA){ /*Check if GPA order wrong*/
-                /*Change data of two nodes*/
-                /*Change order data*/
-                order_temp = ptr->order;
-                ptr->order = ptr->pNext->order;
-                ptr->pNext->order = order_temp;
-                /*change name*/
-                strcpy(name_temp,ptr->name);
-                strcpy(ptr->name, ptr->pNext->name);
-                strcpy(ptr->pNext->name, name_temp);
-                /*change account*/
-                strcpy(account_temp, ptr->account);
-                strcpy(ptr->account, ptr->pNext->account);
-                strcpy(ptr->pNext->account, account_temp);
-                /*change GPA*/
-                GPA_temp = ptr->GPA;
-                ptr->GPA = ptr->pNext->GPA;
-                ptr->pNext->GPA = GPA_temp;
-            }
-            ptr = ptr->pNext; /*jump to next node*/
-        }
-        ptr=list->pHead; /*return to pHead to run next loop*/
-    }
-}
-
+/*Free up memory for list*/
 void freeList(LIST *list){
     FRESHER *ptr = list->pHead;
     FRESHER *ptr_temp = NULL;
@@ -309,5 +240,7 @@ void freeList(LIST *list){
             free(ptr);
             ptr = ptr_temp;
     }
+    list->pHead = NULL;
+    list->pTail = NULL;
 }
 
