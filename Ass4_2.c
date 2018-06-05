@@ -19,7 +19,7 @@ struct list{
     FRESHER *pTail;
 };
 typedef struct list LIST; /*Dinh nghia kieu cho struct list*/
-
+/*alsdkfjlasdkfjlaskfjlasdkfj*/
 void initialize(LIST *l){
     l.pHead = NULL;
     l.pTail = NULL;
@@ -48,7 +48,7 @@ FRESHER *Initialize_Freshernode(int order, char name[50], char account[20], floa
 
 void Themvaodau(LIST *list, FRESHER *ptr){
     if(list.pHead == NULL){ /*Check dieu kien danh sach rong hay khong*/
-        list.pHead = ptr;
+        list->pHead = ptr;
         list->pTail = ptr; /*node dau bang node cuoi bang ptr luon*/
     }
     else{
